@@ -33,6 +33,8 @@ Basic features of our game include:
 
 
 ## Technical Architecture
+![Technical Architecture](architecture.png)
+
 
 
 
