@@ -1,2 +1,0 @@
-{'username': 'PhantomPlease', 'encrypted_password': '530'}
-{'username': 'Tahageniushai', 'encrypted_password': 'ndbhsao wbbhs'}
