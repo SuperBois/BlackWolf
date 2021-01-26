@@ -90,5 +90,3 @@ Within the root directory, launch the game from 'main.py'.
 2. In case of a new user, register your account first by clicking on "Register".
 
 3. Login with your credentials which will open a new prompt. Click on 'Play Game'.
-
-
