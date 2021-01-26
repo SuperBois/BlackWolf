@@ -83,7 +83,7 @@ pip install pillow
 
 **Running the game:**
 
-Within the root directory, launch the game from 'main.py'.
+Within the root directory, launch the game from 'menu.py'.
 
 1. A menu will launch in which you will be prompted to enter in your login credentials to play the game.
 
