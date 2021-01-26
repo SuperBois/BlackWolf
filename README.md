@@ -28,7 +28,7 @@ Basic features of our game include:
   - Traffic system.
   - In-game currency System.
   - Paint shop for car customization.
-  - Mini-game and a Car Tournament implemented within the main game.
+  - Car avoiding mini-game, Space shooeter mini-game and a Car Tournament implemented within the main game.
 
 
 
