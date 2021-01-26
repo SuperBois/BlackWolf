@@ -81,11 +81,11 @@ def space_shooter(screen, coins,state, username):
         end_screen = explode(screen, [player_rect.centerx, player_rect.centery], (255, 201, 14), 10, ended)
         state = 'space_shooter'
         if end_screen:
-            state = game_over(screen, username)
+            state = game_over(screen, username, coins)
             
         return coins, state
 
-def game_over(screen,username):
+def game_over(screen,username, coins):
     game_over = pygame.image.load('Images\\gameover.png')
     screen.blit(game_over, game_over.get_rect())
     keys = pygame.key.get_pressed()
