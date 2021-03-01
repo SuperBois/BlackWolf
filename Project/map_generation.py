@@ -1,4 +1,4 @@
-import pygame
+
 from game_functions import *
 
 #############################  LOADING iMAGES AND GETTING THEIR DIMENSIONS #####################################
@@ -105,12 +105,15 @@ def create_map(screen):
                 'lane_vertical': create_cars(grounds, ground_width - 25, 200, footpath_width, footpath_height),
                 'lane_horizontal': create_cars(grounds, 200, ground_height - 25, footpath2_width, footpath2_height),
                 'colliders': colliders,
-                'car_paint':[car_paint_rect],
-                'car_race':[car_race_rect],
-                'f1_racer':[f1_racer_rect],
+                'paint_shop':[car_paint_rect],
+                'tournament':[car_race_rect],
+                'mini_game':[f1_racer_rect],
                 'space_shooter':[spaceshooter_rect]
                 }
-
+    shops = {'paint_shop':[car_paint_rect],
+                'tournament':[car_race_rect],
+                'mini_game':[f1_racer_rect],
+                'space_shooter':[spaceshooter_rect]}
     obj_img_dict = {
                 'grounds': ground_image,
                 'car': ver_car,
@@ -119,12 +122,12 @@ def create_map(screen):
                 'lane_vertical': footpath,
                 'lane_horizontal': footpath2,
                 'colliders': None,
-                'car_paint':car_paint,
-                'car_race':car_race,
-                'f1_racer':f1_racer,
+                'paint_shop':car_paint,
+                'tournament':car_race,
+                'mini_game':f1_racer,
                 'space_shooter':space_shooter
                 }
-    return obj_dict, obj_img_dict
+    return obj_dict, obj_img_dict,shops
 
 
 def display(screen, all_objects, objects_img):
@@ -137,4 +140,3 @@ def display(screen, all_objects, objects_img):
         for value in values:
             if objects_img[key] is not None:
                 screen.blit(objects_img[key], value)
-
