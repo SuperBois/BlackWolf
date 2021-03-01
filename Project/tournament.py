@@ -162,18 +162,18 @@ max_laps = 3
 max_laps_surface = font.render(f'max laps: {max_laps}', True, (255, 255, 255))
 
 
-def game_over(screen, user_name, leaders, coins):
+def game_over(screen, username, leaders):
     # Checks if the username is among the top three positions in the leaderboard
-    if user_name == leaders[0][0]:
+    if username == leaders[0][0]:
         position = font_2.render('Congratulations!! You secured first position.', True, (255, 255, 255))
         coins_text = font.render("You have received 1000 coins", True, (255, 255, 255))
-        coins += 1000
-    elif user_name == leaders[1][0]:
+
+    elif username == leaders[1][0]:
         position = font_2.render('Congratulations!! You secured second position.', True, (255, 255, 255))
         coins_text = font.render("You have received 700 coins", True, (255, 255, 255))
-        coins += 700
-    elif user_name == leaders[2][0]:
-        coins += 400
+
+    elif username == leaders[2][0]:
+
         position = font_2.render('Congratulations!! You secured third position.', True, (255, 255, 255))
         coins_text = font.render("You have received 400 coins", True, (255, 255, 255))
     else:
@@ -181,9 +181,9 @@ def game_over(screen, user_name, leaders, coins):
         coins_text = font.render('Try harder next time', True, (255, 255, 255))
     instructions = font.render('Press ESCAPE to get back to main_game', True, (255, 255, 255))
     screen.blit(position, (200, 350))
+
     screen.blit(coins_text, (200, 400))
     screen.blit(instructions, (200, 500))
-    return coins
 
 
 def game(screen, username, screen_width, coins):
@@ -273,12 +273,20 @@ def game(screen, username, screen_width, coins):
     else:
         keys = pygame.key.get_pressed()
         end = keys[pygame.K_ESCAPE]
-        coins = game_over(screen, username, leaders, coins)
+        game_over(screen, username, leaders)
         if end:
-            state = 'main_game'
+            if username == leaders[0][0]:
+                coins += 1000
+            if username == leaders[1][0]:
+                coins += 700
+            if username == leaders[2][0]:
+                coins += 200
+            print(coins)
             with open(f"profiles\\profile_{username}.txt", "w") as file:
                 user_profile = {'username': username, 'coins': coins}
                 file.writelines(f'{user_profile}')
+            state = 'main_game'
+
         else:
             state = 'tournament'
-    return state
+    return state, coins
