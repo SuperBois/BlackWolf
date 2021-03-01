@@ -100,7 +100,7 @@ Interact: **"F"** key (to get into and out of a car.)
 
 ## Updates
 
-**Update v0.10.0 (March 1, 2021)**
+**Update v1.01.0 (March 1, 2021)**
 
 **Changes**
 
