@@ -30,10 +30,8 @@ def create_cars(grounds, pad_x, pad_y, object_width, object_height):
     for ground_rect in grounds:
         pos_x = ground_rect.topleft[0] + pad_x
         pos_y = ground_rect.topleft[1] + pad_y
-
-        for create in range(1):
-            object_rect = pygame.Rect(pos_x, pos_y, object_width, object_height)
-            object_cars.append(object_rect)
+        object_rect = pygame.Rect(pos_x, pos_y, object_width, object_height)
+        object_cars.append(object_rect)
 
     return object_cars
 
