@@ -17,12 +17,11 @@ def read_coins(username):
         coins = profile_dict['coins']
     return coins
 
-
 def game(username, state):
     # initializes the pygame window
     pygame.init()
     clock = pygame.time.Clock()
-    #CAPTION
+    # CAPTION
     pygame.display.set_caption('BlackWolf')
     # SCREEN DIMENSIONS
     screen_width = 800
@@ -32,7 +31,7 @@ def game(username, state):
     screen = pygame.display.set_mode((screen_width, screen_height), 0, 32)
 
     # Stores all the objects on screen and their images in the form of a dictionary
-    obj_dict, obj_img_dict = create_map(screen)
+    obj_dict, obj_img_dict, shops = create_map(screen)
 
     # initializes the state of the game
 
@@ -43,8 +42,11 @@ def game(username, state):
     car_dict_list = car_dicts(obj_dict['car'], obj_img_dict['car'])
     coins = read_coins(username)
 
+    ended = False
+
     while state != 'end':
         # FOR ENDING GAME
+
         for events in pygame.event.get():
             if events.type == pygame.QUIT:
                 pygame.quit()
@@ -60,7 +62,6 @@ def game(username, state):
 
         keys = pygame.key.get_pressed()
 
-
         up = keys[pygame.K_UP]
         down = keys[pygame.K_DOWN]
         left = keys[pygame.K_LEFT]
@@ -68,28 +69,15 @@ def game(username, state):
 
         player_rect = player_dict['rect']
 
-        if player_rect.colliderect(obj_dict['car_paint'][0]):
-            state = 'paint_shop'
-            player_rect.x -= 15
-            player_rect.y -= 15
-        elif player_rect.colliderect(obj_dict['car_race'][0]):
-            state = 'tournament'
-            player_rect.x -= 15
-            player_rect.y -= 15
-        elif player_rect.colliderect(obj_dict['f1_racer'][0]):
-            state = 'mini_game'
-            player_rect.x -= 15
-            player_rect.y -= 15
-        elif player_rect.colliderect(obj_dict['space_shooter'][0]):
-            state = 'space_shooter'
-            player_rect.x -= 15
-            player_rect.y -= 15
-
-
-
-
-
-
+        for key,values in shops.items():
+            if player_rect.colliderect(shops[key][0]):
+                state = key
+                if state == 'space_shooter':
+                    ended = False
+                diff = player_rect.x - (obj_dict[key][0].x) + 30
+                for keys, values in obj_dict.items():
+                    for rect in obj_dict[keys]:
+                        rect.x += diff
 
         if state == 'main_game':
             # clears the screen (by filling it with colour)
@@ -118,16 +106,15 @@ def game(username, state):
             player_dict['static_car'] = player_dict['car']
 
         elif state == 'tournament':
-            state = tournament.game(screen, username, screen_width, coins)
+            state, coins = tournament.game(screen, username, screen_width, coins)
 
         elif state == 'mini_game':
             state, coins = mini_game(state, coins, screen, username)
 
         elif state == 'space_shooter':
-            coins , state = space_shooter(screen,coins,state,username)
-
-
+            state , coins, ended = space_shooter(screen,coins,state,username,ended)
 
         # Limits the framerate of the game
-        clock.tick(30)
+        clock.tick(45)
+
         pygame.display.update()
