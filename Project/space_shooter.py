@@ -1,5 +1,4 @@
 from explosions import *
-import time
 
 # background image
 bg = pygame.image.load('Images\\bg.jpg')
@@ -19,17 +18,17 @@ asteriod_rect.y = 50
 bullet = pygame.image.load('Images\\bullet.png')
 bullet_rect = bullet.get_rect()
 fire = False
-ended = False
 
 # font
 font = pygame.font.SysFont("Comic Sans MS", 30)
 coins_text = font.render('Coins: ', True, (250,250,250))
 
-def space_shooter(screen, coins,state, username):
-    global player_rect, fire, ended
+def space_shooter(screen, coins,state, username, ended):
+    global player_rect, fire
     screen.blit(bg, (0, 0))
     keys = pygame.key.get_pressed()
     if not ended:
+
         state = 'space_shooter'
         # gets all pressed keys
 
@@ -63,6 +62,8 @@ def space_shooter(screen, coins,state, username):
 
         if player_rect.colliderect(asteriod_rect):
             explode(screen, [player_rect.centerx, player_rect.centery], (255, 201, 14), 10,ended)
+            asteriod_rect.x = random.randint(310, 460)
+            asteriod_rect.y = 50
             ended = True
 
         if asteriod_rect.colliderect(bullet_rect):
@@ -75,20 +76,21 @@ def space_shooter(screen, coins,state, username):
         coins_surface = font.render(str(coins), True, (200, 200, 200))
         screen.blit(coins_text, (20, 20))
         screen.blit(coins_surface, (100, 20))
-        return coins, state
+        return state,coins,ended
     else:
         # explosive effect
         end_screen = explode(screen, [player_rect.centerx, player_rect.centery], (255, 201, 14), 10, ended)
         state = 'space_shooter'
         if end_screen:
             state = game_over(screen, username, coins)
-            
-        return coins, state
+
+        return state, coins, ended
 
 def game_over(screen,username, coins):
     game_over = pygame.image.load('Images\\gameover.png')
     screen.blit(game_over, game_over.get_rect())
     keys = pygame.key.get_pressed()
+
     if keys[pygame.K_ESCAPE]:
         with open(f"profiles\\profile_{username}.txt", "w") as file:
             user_profile = {'username': username, 'coins': coins}
