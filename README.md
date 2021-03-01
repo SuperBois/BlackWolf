@@ -28,7 +28,7 @@ Basic features of our game include:
   - Traffic system.
   - In-game currency System.
   - Paint shop for car customization.
-  - Car avoiding mini-game, Space shooeter mini-game and a Car Tournament implemented within the main game.
+  - Car avoiding mini-game, Space shooter mini-game and a Car Tournament implemented within the main game.
 
 
 
@@ -39,7 +39,7 @@ Basic features of our game include:
 
 
 ## Installation and Running Project BlackWolf
-**Requirements:**
+**Requirements**
 
 You need to have installed:
 
@@ -51,7 +51,7 @@ You need to have installed:
 
 
 
-**Installation guide:**
+**Installation guide**
 
 After installation of [Python3](https://www.python.org/downloads/release/python-391/), you need to install Pygame and Pillow (Python Libraries).
 
@@ -81,7 +81,7 @@ pip install pillow
 ```
 
 
-**Running the game:**
+**Running the game**
 
 Within the root directory, launch the game from 'menu.py'.
 
@@ -90,3 +90,26 @@ Within the root directory, launch the game from 'menu.py'.
 2. In case of a new user, register your account first by clicking on "Register".
 
 3. Login with your credentials which will open a new prompt. Click on 'Play Game'.
+
+**Controls**
+
+
+Movement: **Up, Down, Left, Right** Arrow keys
+
+Interact: **"F"** key (to get into and out of a car.)
+
+## Updates
+
+**Update v0.10.0 (March 1, 2021)**
+
+**Changes**
+
+- Fixed coins not properly being updated to user_profile.txt from Car Tournament and Space Shooter mini-game. 
+- Fixed collision models to accept collision from either side and allow user to escape out of the 4 in-game regions (Paint shop, f1_racer, tournament, space-shooter). Previously, if you would collide with the rects at a certain angle, the escape condition would fail.  
+- Fixed a bug with space-shooter mini-game which would cause the game to crash if you played the mini-game more than once. 
+- Miscellaneous quality of code improvements. 
+ 
+
+**Known Issues**
+- The camera-view gets disrupted when colliding with objects with a car causing the car to go out of center of view.
+- Cannot play the Car Race Tournament more than once.
